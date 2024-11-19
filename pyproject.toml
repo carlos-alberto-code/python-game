@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 pygame = "^2.6.1"
 cairosvg = "^2.7.1"
+sqlalchemy = "^2.0.36"
 
 
 [build-system]
