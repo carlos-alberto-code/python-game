@@ -2,6 +2,7 @@ import pygame
 import random
 import sys
 import os
+from sqlalchemy.orm import Mapped
 
 # Initialize Pygame
 pygame.init()
