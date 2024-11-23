@@ -1,9 +1,6 @@
 from typing import Tuple, Optional
 import pygame as pg
 
-from typing import Tuple, Optional
-import pygame as pg
-
 class MySprite(pg.sprite.Sprite):
     def __init__(self, x: int, y: int, color: Optional[Tuple[int, int, int]] = None, image_path: Optional[str] = None, *groups: pg.sprite.AbstractGroup):
         super().__init__(*groups)
@@ -16,12 +13,22 @@ class MySprite(pg.sprite.Sprite):
                 self.image.fill(color)
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
-        self.is_main = False  # Añadir un atributo para identificar el sprite principal
+        self.is_main = False
+        self.velocity = pg.Vector2(2, 2)  # Velocidad del sprite
 
     def update(self):
         if self.is_main:
-            self.rect.x += 1
-            self.rect.y += 1
+            keys = pg.key.get_pressed()
+            if keys[pg.K_LEFT]:
+                self.rect.x -= 5
+            if keys[pg.K_RIGHT]:
+                self.rect.x += 5
+            if keys[pg.K_UP]:
+                self.rect.y -= 5
+            if keys[pg.K_DOWN]:
+                self.rect.y += 5
+        self.rect.x += self.velocity.x
+        self.rect.y += self.velocity.y
 
     def draw(self, screen: pg.Surface):
         screen.blit(self.image, self.rect)
