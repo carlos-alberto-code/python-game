@@ -1,4 +1,3 @@
-
 class Game:
     def __init__(self):
         # ...existing code...

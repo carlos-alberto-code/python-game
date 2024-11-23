@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "python-game"
 version = "0.1.0"
-description = ""
+description = "A retro-style survival game with grid mechanics"
 authors = ["Carlos Alberto Baltazar Hinojosa <A840159943@my.uvm.edu.mx>"]
 readme = "README.md"
 
@@ -11,7 +11,29 @@ pygame = "^2.6.1"
 cairosvg = "^2.7.1"
 sqlalchemy = "^2.0.36"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+black = "^24.10.0"
+mypy = "^1.13.0"
+pylint = "^3.3.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+game = "src.core.game:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

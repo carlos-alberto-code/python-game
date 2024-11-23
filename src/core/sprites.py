@@ -1,8 +1,16 @@
 from typing import Tuple, Optional
 import pygame as pg
 
+
 class MySprite(pg.sprite.Sprite):
-    def __init__(self, x: int, y: int, color: Optional[Tuple[int, int, int]] = None, image_path: Optional[str] = None, *groups: pg.sprite.AbstractGroup):
+    def __init__(
+        self,
+        x: int,
+        y: int,
+        color: Optional[Tuple[int, int, int]] = None,
+        image_path: Optional[str] = None,
+        *groups: pg.sprite.AbstractGroup,
+    ):
         super().__init__(*groups)
         if image_path:
             self.image = pg.image.load(image_path).convert_alpha()
@@ -44,7 +52,8 @@ def handle_keydown(event: pg.event.Event, sprite: MySprite):
     elif event.key == pg.K_DOWN:
         sprite.rect.y += 10
 
-def handle_mousebuttondown(event: pg.event.Event , sprite: MySprite):
+
+def handle_mousebuttondown(event: pg.event.Event, sprite: MySprite):
     if event.button == 1:  # Botón izquierdo del ratón
         sprite.rect.topleft = event.pos
 
@@ -65,15 +74,19 @@ player_sprite = MySprite(100, 100, (255, 0, 0))
 player_sprite.is_main = True  # Marcar player_sprite como el sprite principal
 enemy1 = MySprite(200, 200, (0, 255, 0))
 enemy2 = MySprite(300, 300, (0, 0, 255))
-enemy_with_image = MySprite(400, 400, image_path='imagenes/Bloquador.png')  # Sprite con imagen
+enemy_with_image = MySprite(
+    400, 400, image_path="imagenes/Bloquador.png"
+)  # Sprite con imagen
 
 all_sprites.add(player_sprite, enemy1, enemy2, enemy_with_image)
 enemy_sprites.add(enemy1, enemy2, enemy_with_image)
+
 
 def handle_collisions():
     collisions = pg.sprite.spritecollide(player_sprite, enemy_sprites, False)
     for collided_sprite in collisions:
         print(f"Collision with {collided_sprite}")
+
 
 event_handlers = {
     pg.QUIT: lambda event: exit(),
